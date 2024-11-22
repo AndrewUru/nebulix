@@ -6,14 +6,12 @@ import m2dx from "astro-m2dx";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import rehypeExternalLinks from "rehype-external-links";
-import fauxRemarkEmbedder from "@remark-embedder/core";
-import fauxOembedTransformer from "@remark-embedder/transformer-oembed";
-const remarkEmbedder = fauxRemarkEmbedder.default;
-const oembedTransformer = fauxOembedTransformer.default;
+import remarkEmbedder from "@remark-embedder/core";
+import oembedTransformer from "@remark-embedder/transformer-oembed";
 import vue from "@astrojs/vue";
-/** @type {import('astro-m2dx').Options} */
 import prefetch from "@astrojs/prefetch";
 import compress from "astro-compress";
+
 const m2dxOptions = {
   exportComponents: true,
   unwrapImages: true,
@@ -24,7 +22,7 @@ const m2dxOptions = {
 export default defineConfig({
   site: "https://nebulix.unfolding.io",
   integrations: [
-    mdx({}),
+    mdx(),
     sitemap(),
     tailwind(),
     vue({
@@ -63,14 +61,15 @@ export default defineConfig({
   },
   vite: {
     build: {
-      rollupOptions: {
-        external: [
-          "/_pagefind/pagefind.js",
-          "/_pagefind/pagefind-ui.js",
-          "/_pagefind/pagefind-ui.css",
-        ],
-      },
       assetsInlineLimit: 10096,
+      // Comentado rollupOptions para simplificar
+      // rollupOptions: {
+      //   external: [
+      //     "/_pagefind/pagefind.js",
+      //     "/_pagefind/pagefind-ui.js",
+      //     "/_pagefind/pagefind-ui.css",
+      //   ],
+      // },
     },
   },
   build: {
